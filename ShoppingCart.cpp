@@ -24,7 +24,7 @@ string ShoppingCart::GetDate() const {
 
 
 void ShoppingCart::AddItem(ItemToPurchase item) {
-
+  cartItems.push_back(item);
 }
 
 void ShoppingCart::RemoveItem(string name) {
@@ -36,12 +36,26 @@ void ShoppingCart::ModifyItem(ItemToPurchase item) {
 }
 
 int ShoppingCart::GetNumItemsInCart() {
+  int counter = 0;
 
-}
+        for (int i = 0; i < cartItems.size(); ++i){
+            counter +=  cartItems.at(i).GetQuantity();
+        }
+
+        return counter;
+    } 
+
+
 
 double ShoppingCart::GetCostOfCart() {
+  double all = 0;
 
-}
+        for (int i = 0; i < cartItems.size(); i++){
+            all += cartItems.at(i).GetPrice() * cartItems.at(i).GetQuantity();
+        }
+
+        return all; 
+    }
 
 void ShoppingCart::PrintTotal() {
     unsigned i;
@@ -83,3 +97,4 @@ void ShoppingCart::PrintDescriptions() {
         cout << "SHOPPING CART IS EMPTY" << endl;
     }
 }
+
