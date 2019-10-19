@@ -78,6 +78,7 @@ char PrintMenu(ShoppingCart& theCart){
          cin >> quantity;
          
          ItemToPurchase item;
+
          item.SetName(name);
          item.SetQuantity(quantity);
          
