@@ -28,7 +28,11 @@ void ShoppingCart::AddItem(ItemToPurchase item) {
 }
 
 void ShoppingCart::RemoveItem(string name) {
-
+  for (int i = 0; i < cartItems.size(); i++){
+    if(cartItems.at(i).GetName() == name){
+      cartItems.erase(cartItems.begin()+i);   
+    }
+  }
 }
 
 void ShoppingCart::ModifyItem(ItemToPurchase item) {
