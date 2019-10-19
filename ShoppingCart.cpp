@@ -24,59 +24,42 @@ string ShoppingCart::GetDate() const {
 
 
 void ShoppingCart::AddItem(ItemToPurchase item) {
-    cartItems.push_back(item);
+  cartItems.push_back(item);
 }
 
 void ShoppingCart::RemoveItem(string name) {
-
+  for (int i = 0; i < cartItems.size(); i++){
+    if(cartItems.at(i).GetName() == name){
+      cartItems.erase(cartItems.begin()+i);   
+    }
+  }
 }
 
 void ShoppingCart::ModifyItem(ItemToPurchase item) {
-    unsigned k;
-    string tempName = item.GetName();
-    int tempPrice = item.GetPrice();
-    string tempCartName;
-    string tempDesc = "";
-    int tempQuan = item.GetQuantity();
 
-
-    for(k = 0; k < cartItems.size(); ++k) {
-        if (tempName == cartItems.at(k).GetName()) {
-            if (cartItems.at(k).GetQuantity() == 0) {
-                //cout << "Enter the item quantity:"<<endl;
-                //cin >> tempQuan;
-                cartItems.at(k).SetQuantity(tempQuan);
-            }
-            if (cartItems.at(k).GetPrice() == 0) {
-                cout << "Enter the item price:" << endl;
-                cin >> tempPrice;
-                cartItems.at(k).SetPrice(tempPrice);
-            }
-            if (cartItems.at(k).GetDescription() == "none") {
-                cout << "Enter the item description:" << endl;
-                cin.ignore();
-                getline(cin, tempDesc);
-
-                cartItems.at(k).SetDescription(tempDesc);
-            }
-            break;
-        } else if (tempName != tempCartName && k == cartItems.size() - 1) {
-            break;
-        }
-    }
-
-    if(tempName != cartItems.at(k+0).GetName()){
-        cout<< "Item not found in cart. Nothing modified.";
-    }
 }
 
 int ShoppingCart::GetNumItemsInCart() {
-    return 0;
-}
+  int counter = 0;
+
+        for (int i = 0; i < cartItems.size(); ++i){
+            counter +=  cartItems.at(i).GetQuantity();
+        }
+
+        return counter;
+    } 
+
+
 
 double ShoppingCart::GetCostOfCart() {
-    return 2.0;
-}
+  double all = 0;
+
+        for (int i = 0; i < cartItems.size(); i++){
+            all += cartItems.at(i).GetPrice() * cartItems.at(i).GetQuantity();
+        }
+
+        return all; 
+    }
 
 void ShoppingCart::PrintTotal() {
     unsigned i;
@@ -118,3 +101,4 @@ void ShoppingCart::PrintDescriptions() {
         cout << "SHOPPING CART IS EMPTY" << endl;
     }
 }
+
